@@ -1,7 +1,5 @@
 package com.kiwi.activities;
 
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -9,8 +7,6 @@ import android.widget.TextView;
 
 import com.kiwi.clientside.ClientController;
 import com.kiwi.model.User;
-
-import org.w3c.dom.Text;
 
 public class MainpageActivity extends AppCompatActivity {
     private ClientController clientController;

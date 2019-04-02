@@ -29,7 +29,7 @@
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@+id/registerButton2" />
 
     <EditText
         android:id="@+id/usernametext"
@@ -64,7 +64,7 @@
         tools:targetApi="o" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/registerButton2"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
         android:layout_marginTop="8dp"
@@ -75,7 +75,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passtext" />
 
     <Button
-        android:id="@+id/registerbutton"
+        android:id="@+id/registerButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
