@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Oppy</string>
+    <string name="login">Please login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="loginbutton">Login</string>
+    <string name="register">Register</string>
+</resources>
