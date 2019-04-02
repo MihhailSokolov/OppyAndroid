@@ -35,11 +35,8 @@ public class LoginActivity extends AppCompatActivity {
 
         final Button loginButton = findViewById(R.id.loginButton);
 
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         final Intent intent = new Intent(this, MainpageActivity.class);
         loginButton.setOnClickListener(new View.OnClickListener() {
