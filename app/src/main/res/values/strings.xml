@@ -5,4 +5,9 @@
     <string name="password">Password</string>
     <string name="loginbutton">Login</string>
     <string name="register">Register</string>
+    <string name="fail_login">Can\'t login. Invalid username/password.</string>
+    <string name="unfilled_fields">All fields must be filled</string>
+    <string name="invalid_email">Please enter a valid e-mail account.</string>
+    <string name="invalid_register_pass">Passwords should match and should be at least 8 characters long.</string>
+    <string name="invalid_register_username_email">Username or email are is already registered</string>
 </resources>
