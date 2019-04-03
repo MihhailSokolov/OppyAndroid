@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.kiwi.clientside.ClientController;
 import com.kiwi.model.User;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class FriendsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ClientController clientController;
 
     /*TODO
      * Sort to points
@@ -29,10 +31,12 @@ public class FriendsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-        List<User> users = new ArrayList<User>();
-        users.add(new User("Sam","","", 500, new Date()));
-        users.add(new User("Mihhail","","", 650, new Date()));
-        users.add(new User("Ben","","", 235, new Date()));
+
+        clientController = new ClientController((User)getIntent().getSerializableExtra("user"), true);
+        clientController.updateUser();
+        clientController.updateFriendList();
+        List<User> users = clientController.getUser().getFriends();
+
         mAdapter = new UserAdapter(users, getApplication());
 
 
