@@ -1,6 +1,5 @@
 package com.kiwi.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kiwi.clientside.ClientController;
 import com.kiwi.model.User;
@@ -57,30 +57,22 @@ public class RegisterActivity extends AppCompatActivity {
                 String pass2 = passwordText2.getText().toString();
 
                 if (username.isEmpty() || mail.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
-                    new AlertDialog.Builder(RegisterActivity.this)
-                            .setTitle("Warning")
-                            .setMessage("All fields must be filled")
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.unfilled_fields),
+                            Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 Matcher matcher = mailRegex.matcher(mail);
                 if (!matcher.find()) {
-                    new AlertDialog.Builder(RegisterActivity.this)
-                            .setTitle("Warning")
-                            .setMessage("Please enter a valid e-mail")
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.invalid_email), Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (!pass1.equals(pass2) || pass1.length() < 8) {
-                    new AlertDialog.Builder(RegisterActivity.this)
-                            .setTitle("Warning")
-                            .setMessage("Passwords should match and should be at least 8 characters")
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.invalid_register_pass),
+                            Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -92,11 +84,9 @@ public class RegisterActivity extends AppCompatActivity {
                     loginPageIntent.putExtra("user", user);
                     startActivity(loginPageIntent);
                 } else {
-                    new AlertDialog.Builder(RegisterActivity.this)
-                            .setTitle("Register error")
-                            .setMessage("Username or e-mail is already registered")
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.invalid_register_username_email),
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });

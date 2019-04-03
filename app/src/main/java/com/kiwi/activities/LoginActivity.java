@@ -1,6 +1,5 @@
 package com.kiwi.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -42,15 +42,12 @@ public class LoginActivity extends AppCompatActivity {
                         "", 0, new Date());
                 clientController = new ClientController(user, false);
                 String response = clientController.login();
-                if (response.equals("true")){
+                if (response.equals("true")) {
                     mainPageIntent.putExtra("user", user);
                     startActivity(mainPageIntent);
                 } else {
-                    new AlertDialog.Builder(LoginActivity.this)
-                            .setTitle("Login error")
-                            .setMessage("Can't login. Username or password is incorrect")
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.fail_login),
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });
