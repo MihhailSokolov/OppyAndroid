@@ -17,6 +17,14 @@ public class FriendsActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    /*TODO
+     * Sort to points
+     * Get friendlist from server
+     * Prettify (add user profile pic? change text color etc)
+     * Add friend functionality
+     * Delete friend functionality
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +38,11 @@ public class FriendsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerview);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
+
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setAdapter(mAdapter);
 
-        // use a linear layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
