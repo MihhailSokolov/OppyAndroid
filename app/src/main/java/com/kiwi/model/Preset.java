@@ -3,10 +3,11 @@ package com.kiwi.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Preset {
+public class Preset implements Serializable {
 
     private String name;
     private List<String> actionList;

@@ -1,7 +1,10 @@
 package com.kiwi.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +16,7 @@ public class MainpageActivity extends AppCompatActivity {
     private TextView decaytext;
     private TextView pointstext;
     private ImageView oppyimage;
+    private Button friendsButton;
 
 
     @Override
@@ -28,6 +32,16 @@ public class MainpageActivity extends AppCompatActivity {
 
         pointstext.setText(String.valueOf(clientController.getUser().getScore()));
         setOppyImage();
+
+        friendsButton =findViewById(R.id.friendsbutton);
+        friendsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent friendsIntent = new Intent(MainpageActivity.this, FriendsActivity.class);
+                friendsIntent.putExtra("user", clientController.getUser());
+                startActivity(friendsIntent);
+            }
+        });
 
 
     }

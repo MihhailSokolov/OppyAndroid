@@ -21,25 +21,24 @@ public class FriendsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        List<User> users = new ArrayList<User>();
+        users.add(new User("Sam","","", 500, new Date()));
+        users.add(new User("Mihhail","","", 650, new Date()));
+        users.add(new User("Ben","","", 235, new Date()));
+        mAdapter = new UserAdapter(users, getApplication());
+
+
+        recyclerView = findViewById(R.id.recyclerview);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        // specify an adapter (see also next example)
-        //TODO: get friendList and pass on to below
-        List<User> users = new ArrayList<User>();
-        users.add(new User("Sam","","", 500, new Date()));
-        users.add(new User("Mihhail","","", 650, new Date()));
-        users.add(new User("Ben","","", 235, new Date()));
-
-        mAdapter = new UserAdapter(users);
         recyclerView.setAdapter(mAdapter);
+
+        // use a linear layout manager
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
     }
 }

@@ -6,54 +6,65 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.kiwi.model.User;
 
 import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
-    List<User> userList;
+public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
-    public UserAdapter(List<User> users) {
-        this.userList = users;
-    }
+    List<User> list;
+    Context context;
 
-    @NonNull
-    @Override
-    public UserViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_friends,
-                viewGroup, false);
-        return new UserViewHolder(v);
+    public UserAdapter(List<User> list, Context context) {
+        this.list = list;
+        this.context = context;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserViewHolder userViewHolder, int i) {
-        userViewHolder.textViewUsername.setText(userList.get(i).getUsername());
-        userViewHolder.textViewPoints.setText(String.valueOf(userList.get(i).getScore()));
+    public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        //Inflate the layout, initialize the View Holder
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_view, parent, false);
+        UserViewHolder holder = new UserViewHolder(v);
+        return holder;
+
+    }
+
+
+    @Override
+    public void onBindViewHolder(@NonNull UserViewHolder userViewHolder, int position) {
+
+        //Use the provided View Holder on the onCreateViewHolder method to populate the current row on the RecyclerView
+        userViewHolder.usernameTextView.setText(list.get(position).getUsername());
+        userViewHolder.scoreTextView.setText(String.valueOf(list.get(position).getScore()));
+
+        //animate(holder);
+
     }
 
     @Override
     public int getItemCount() {
-        return userList.size();
-    }
-
-    public static class UserViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewUsername;
-        public TextView textViewPoints;
-
-        public UserViewHolder(View v) {
-            super(v);
-            textViewUsername = v.findViewById(R.id.text_list_username);
-            textViewPoints = v.findViewById(R.id.text_list_points);
-        }
+        //returns the number of elements the RecyclerView will display
+        return list.size();
     }
 
     @Override
-    public int getItemViewType(final int position) {
-        return R.layout.list_item_view;
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 
+    // Insert a new item to the RecyclerView on a predefined position
+    public void insert(int position, User data) {
+        list.add(position, data);
+        notifyItemInserted(position);
+    }
 
+    // Remove a RecyclerView item containing a specified Data object
+    public void remove(User data) {
+        int position = list.indexOf(data);
+        list.remove(position);
+        notifyItemRemoved(position);
+    }
 
 }
+
