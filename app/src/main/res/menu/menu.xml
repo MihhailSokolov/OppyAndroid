@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- "Friends", should appear as action button if possible -->
+    <item
+        android:id="@+id/action_friends"
+        android:icon="@drawable/hug"
+        android:title="@string/friends"
+        app:showAsAction="ifRoom"/>
+    <!-- Settings, should always be in the overflow -->
+    <item android:id="@+id/action_settings"
+        android:title="@string/settings"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_leaderboard"
+        android:icon="@drawable/raceflag"
+        android:title="@string/leaderboard"
+        app:showAsAction="ifRoom"
+        />
+    <item android:id="@+id/action_mainpage"
+        android:icon="@drawable/oppyicon"
+        android:title="Main page"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>
+

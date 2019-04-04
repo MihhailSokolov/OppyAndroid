@@ -12,7 +12,11 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FriendsActivity"></activity>
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@menu/menu" />
+
+        <activity android:name=".FriendsActivity" />
         <activity android:name=".MainpageActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
