@@ -10,4 +10,8 @@
     <string name="invalid_email">Please enter a valid e-mail account.</string>
     <string name="invalid_register_pass">Passwords should match and should be at least 8 characters long.</string>
     <string name="invalid_register_username_email">Username or email are is already registered</string>
+    <string name="friends">Friends</string>
+    <string name="settings">Settings</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="main_page">Main page</string>
 </resources>

@@ -1,9 +1,14 @@
 package com.kiwi.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,13 +33,12 @@ public class FriendsActivity extends AppCompatActivity {
     private Button delbutton;
     private TextView searchTextView;
     private List<User> friendList;
+    private Intent mainPageIntent;
+    private Toolbar toolbar;
 
 
     /*TODO
-     * Sort to points
      * Prettify (add user profile pic? change text color etc)
-     * Add friend functionality
-     * Delete friend functionality
      */
 
     @Override
@@ -48,6 +52,11 @@ public class FriendsActivity extends AppCompatActivity {
         clientController.updateFriendList();
         friendList = clientController.getUser().getFriends();
         Collections.sort(friendList, userScoreComparator);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mainPageIntent = new Intent(FriendsActivity.this, MainpageActivity.class);
 
         mAdapter = new UserAdapter(friendList, getApplication());
         recyclerView = findViewById(R.id.recyclerview);
@@ -103,6 +112,35 @@ public class FriendsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                //TODO
+                // User chose the "Settings" item, show the app settings UI...
+                return true;
+
+            case R.id.action_mainpage:
+                mainPageIntent.putExtra("user", clientController.getUser());
+                startActivity(mainPageIntent);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private List<String> getFriendNames(List<User> list) {

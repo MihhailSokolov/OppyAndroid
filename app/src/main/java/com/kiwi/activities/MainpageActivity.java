@@ -3,8 +3,10 @@ package com.kiwi.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +18,9 @@ public class MainpageActivity extends AppCompatActivity {
     private TextView decaytext;
     private TextView pointstext;
     private ImageView oppyimage;
-    private Button friendsButton;
+    private Toolbar toolbar;
+    private Intent friendsIntent;
+
 
 
     @Override
@@ -26,25 +30,48 @@ public class MainpageActivity extends AppCompatActivity {
         clientController = new ClientController((User)getIntent().getSerializableExtra("user"), true);
         clientController.updateUser();
 
+        friendsIntent = new Intent(MainpageActivity.this, FriendsActivity.class);
+
         pointstext = findViewById(R.id.pointstext);
         decaytext = findViewById(R.id.decaytext);
         oppyimage = findViewById(R.id.oppyimage);
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
 
         pointstext.setText(String.valueOf(clientController.getUser().getScore()));
         setOppyImage();
+    }
 
-        friendsButton =findViewById(R.id.friendsbutton);
-        friendsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent friendsIntent = new Intent(MainpageActivity.this, FriendsActivity.class);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                //TODO
+                // User chose the "Settings" item, show the app settings UI...
+                return true;
+
+            case R.id.action_friends:
                 friendsIntent.putExtra("user", clientController.getUser());
                 startActivity(friendsIntent);
-            }
-        });
+                return true;
 
-
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
+
 
     private void setOppyImage(){
         int userScore = clientController.getUser().getScore();
