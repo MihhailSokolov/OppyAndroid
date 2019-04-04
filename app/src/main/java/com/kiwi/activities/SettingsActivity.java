@@ -1,6 +1,8 @@
 package com.kiwi.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,10 +11,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -35,7 +39,9 @@ public class SettingsActivity extends AppCompatActivity {
         clientController = new ClientController((User)getIntent().getSerializableExtra("user"), true);
         clientController.updateUser();
         user = clientController.getUser();
-        
+
+        Button resetPointsButton = findViewById(R.id.resetPointsButton);
+        Button deleteAccountButton = findViewById(R.id.deleteAccButton);
         Button changeEmailButton = findViewById(R.id.changeEmailButton);
         Button changePassButton = findViewById(R.id.changePassButton);
         Button logOutButton = findViewById(R.id.logOutButton);
@@ -92,6 +98,70 @@ public class SettingsActivity extends AppCompatActivity {
                 Intent changeMailIntent = new Intent(SettingsActivity.this, ChangeMailActivity.class);
                 changeMailIntent.putExtra("user", user);
                 startActivity(changeMailIntent);
+            }
+        });
+
+        deleteAccountButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                builder.setTitle("Enter your password");
+                final EditText input = new EditText(SettingsActivity.this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                builder.setView(input);
+                builder.setPositiveButton("Delete account", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String pass = input.getText().toString();
+                        if (pass.isEmpty()) {
+                            Toast.makeText(getApplicationContext(), "Password field cannot be empty", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        String response = clientController.deleteAccount(pass);
+                        if (response.equals("true")) {
+                            Toast.makeText(getApplicationContext(), "Deleted account", Toast.LENGTH_LONG).show();
+                            Intent registerIntent = new Intent(SettingsActivity.this, RegisterActivity.class);
+                            startActivity(registerIntent);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Invalid password", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+            }
+        });
+
+        resetPointsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                builder.setTitle("Enter your password");
+                final EditText input = new EditText(SettingsActivity.this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                builder.setView(input);
+                builder.setPositiveButton("Reset points", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String pass = input.getText().toString();
+                        if (pass.isEmpty()) {
+                            Toast.makeText(getApplicationContext(), "Password field cannot be empty", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        String response = clientController.reset(pass);
+                        if (response.equals("true")) {
+                            Toast.makeText(getApplicationContext(), "Points have been reset", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Invalid password", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
             }
         });
     }

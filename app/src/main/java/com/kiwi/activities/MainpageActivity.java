@@ -1,10 +1,7 @@
 package com.kiwi.activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,16 +27,6 @@ public class MainpageActivity extends AppCompatActivity {
 
         pointstext.setText(String.valueOf(clientController.getUser().getScore()));
         setOppyImage();
-
-        Button settingsButton = findViewById(R.id.settingsButton);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent settingsIntent = new Intent(MainpageActivity.this, SettingsActivity.class);
-                settingsIntent.putExtra("user", clientController.getUser());
-                startActivity(settingsIntent);
-            }
-        });
     }
 
     private void setOppyImage(){

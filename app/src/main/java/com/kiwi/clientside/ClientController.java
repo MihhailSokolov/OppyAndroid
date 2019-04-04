@@ -361,14 +361,16 @@ public class ClientController {
      *
      * @return String response msg ("true"/"false"), implying success or failure.
      */
-    public String deleteAccount() {
-        responseEntity = this.postRequest(this.baseUrl + Path.DELETE.toString(), user);
-        try {
-            return new JSONObject(responseEntity.getBody()).getString("message");
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public String deleteAccount(String password) {
+        if (hash(password).equals(this.user.getPassword())) {
+            responseEntity = this.postRequest(this.baseUrl + Path.DELETE.toString(), user);
+            try {
+                return new JSONObject(responseEntity.getBody()).getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-        return "";
+        return "false";
     }
 
     /**
@@ -399,14 +401,16 @@ public class ClientController {
      *
      * @return String resposne msg ("true"/"false").
      */
-    public String reset() {
-        responseEntity = this.postRequest(this.baseUrl + Path.RESET, this.user);
-        try {
-            return new JSONObject(responseEntity.getBody()).getString("message");
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public String reset(String pass) {
+        if (hash(pass).equals(this.user.getPassword())) {
+            responseEntity = this.postRequest(this.baseUrl + Path.RESET, this.user);
+            try {
+                return new JSONObject(responseEntity.getBody()).getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-        return "";
+        return "false";
     }
 
     /**
