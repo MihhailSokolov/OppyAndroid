@@ -154,7 +154,7 @@ public class ClientController {
 
     /**
      * Sends the base64 encoded profile picture string to the server.
-     * @param img the img file to be encoded and sent.
+     * @param encodedStr the img file to be encoded and sent.
      * @return String response message ("true"/"false").
      */
     public String updateProfilePic(String encodedStr) {
@@ -286,25 +286,28 @@ public class ClientController {
      * Sends an "update user pass" request to the server.
      *
      * @param newPass the new password for the user.
+     * @param oldPlainPass old password for verification.
      * @return String response message ("true"/"false").
      */
-    public String updatePass(String newPass) {
-        responseEntity = this.postRequest(this.baseUrl
-                + String.format(Path.UPDATEPASS.toString(), hash(newPass)), user);
-        try {
-            return new JSONObject(responseEntity.getBody()).getString("message");
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public String updatePass(String newPass, String oldPlainPass) {
+        if (hash(oldPlainPass).equals(this.user.getPassword())) {
+            responseEntity = this.postRequest(this.baseUrl
+                    + String.format(Path.UPDATEPASS.toString(), hash(newPass)), user);
+            try {
+                return new JSONObject(responseEntity.getBody()).getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-        return "";
+        return "false";
     }
 
-    /**
-     * Sends a "take action request" to the server.
-     *
-     * @param actionName action name to be sent.
-     * @return String response msg ("true"/"false").
-     */
+        /**
+         * Sends a "take action request" to the server.
+         *
+         * @param actionName action name to be sent.
+         * @return String response msg ("true"/"false").
+         */
     public String takeAction(String actionName) {
         responseEntity = this.postRequest(this.baseUrl + String.format(Path.TAKEACTION.toString(),
                 user.getUsername()), new Action(actionName, "", 0));

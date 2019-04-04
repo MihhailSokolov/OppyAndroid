@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -35,6 +36,8 @@ public class SettingsActivity extends AppCompatActivity {
         clientController.updateUser();
         user = clientController.getUser();
 
+        Button changePassButton = findViewById(R.id.changePassButton);
+        Button logOutButton = findViewById(R.id.logOutButton);
         ImageView profilePic = findViewById(R.id.profilePic);
         TextView usernameText = findViewById(R.id.textUsername);
         TextView mailText = findViewById(R.id.textEmail);
@@ -59,13 +62,27 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         profilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(Intent.createChooser(intent,"Select picture"), 42);
                 setResult(Activity.RESULT_OK);
+            }
+        });
+
+        logOutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(SettingsActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
+            }
+        });
+
+        changePassButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent changePassIntent = new Intent(SettingsActivity.this, ChangePasswordActivity.class);
+                changePassIntent.putExtra("user", user);
+                startActivity(changePassIntent);
             }
         });
     }
