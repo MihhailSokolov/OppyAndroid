@@ -92,14 +92,15 @@
 
     <Button
         android:id="@+id/backButton1"
-        android:layout_width="72dp"
-        android:layout_height="30dp"
+        android:layout_width="79dp"
+        android:layout_height="37dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@color/colorLogin"
         android:text="Back"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Back" />
+        tools:text="Back to login" />
 
 </android.support.constraint.ConstraintLayout>

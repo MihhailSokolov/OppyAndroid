@@ -25,6 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.kiwi.activities.RegisterActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".ChangeMailActivity" />
         <activity android:name=".RegisterActivity" />
     </application>
 

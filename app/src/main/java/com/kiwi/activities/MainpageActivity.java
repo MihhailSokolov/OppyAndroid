@@ -20,7 +20,7 @@ public class MainpageActivity extends AppCompatActivity {
     private ImageView oppyimage;
     private Toolbar toolbar;
     private Intent friendsIntent;
-
+    private Intent settingsIntent;
 
 
     @Override
@@ -31,6 +31,7 @@ public class MainpageActivity extends AppCompatActivity {
         clientController.updateUser();
 
         friendsIntent = new Intent(MainpageActivity.this, FriendsActivity.class);
+        settingsIntent = new Intent(MainpageActivity.this, SettingsActivity.class);
 
         pointstext = findViewById(R.id.pointstext);
         decaytext = findViewById(R.id.decaytext);
@@ -56,8 +57,8 @@ public class MainpageActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                //TODO
-                // User chose the "Settings" item, show the app settings UI...
+                settingsIntent.putExtra("user", clientController.getUser());
+                startActivity(settingsIntent);
                 return true;
 
             case R.id.action_friends:

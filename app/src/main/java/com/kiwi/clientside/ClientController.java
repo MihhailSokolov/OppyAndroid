@@ -154,15 +154,19 @@ public class ClientController {
 
     /**
      * Sends the base64 encoded profile picture string to the server.
-     * @param img the img file to be encoded and sent.
+     * @param encodedStr the img file to be encoded and sent.
      * @return String response message ("true"/"false").
      */
-//    public String updateProfilePic(BufferedImage img) {
-//        String encodedStr = ImageHandler.getBase64Str(img);
-//        this.user.setProfilePicture(encodedStr);
-//        responseEntity = this.postRequest(this.baseUrl + Path.SETPROFILEPIC.toString(), user);
-//        return new JSONObject(responseEntity.getBody()).getString("message");
-//    }
+    public String updateProfilePic(String encodedStr) {
+        this.user.setProfilePicture(encodedStr);
+        responseEntity = this.postRequest(this.baseUrl + Path.SETPROFILEPIC.toString(), user);
+        try {
+            return new JSONObject(responseEntity.getBody()).getString("message");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return "false";
+        }
+    }
 
     /**
      * Deletes the given preset from the user's presetList on the server.
@@ -282,25 +286,28 @@ public class ClientController {
      * Sends an "update user pass" request to the server.
      *
      * @param newPass the new password for the user.
+     * @param oldPlainPass old password for verification.
      * @return String response message ("true"/"false").
      */
-    public String updatePass(String newPass) {
-        responseEntity = this.postRequest(this.baseUrl
-                + String.format(Path.UPDATEPASS.toString(), hash(newPass)), user);
-        try {
-            return new JSONObject(responseEntity.getBody()).getString("message");
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public String updatePass(String newPass, String oldPlainPass) {
+        if (hash(oldPlainPass).equals(this.user.getPassword())) {
+            responseEntity = this.postRequest(this.baseUrl
+                    + String.format(Path.UPDATEPASS.toString(), hash(newPass)), user);
+            try {
+                return new JSONObject(responseEntity.getBody()).getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-        return "";
+        return "false";
     }
 
-    /**
-     * Sends a "take action request" to the server.
-     *
-     * @param actionName action name to be sent.
-     * @return String response msg ("true"/"false").
-     */
+        /**
+         * Sends a "take action request" to the server.
+         *
+         * @param actionName action name to be sent.
+         * @return String response msg ("true"/"false").
+         */
     public String takeAction(String actionName) {
         responseEntity = this.postRequest(this.baseUrl + String.format(Path.TAKEACTION.toString(),
                 user.getUsername()), new Action(actionName, "", 0));
@@ -354,14 +361,16 @@ public class ClientController {
      *
      * @return String response msg ("true"/"false"), implying success or failure.
      */
-    public String deleteAccount() {
-        responseEntity = this.postRequest(this.baseUrl + Path.DELETE.toString(), user);
-        try {
-            return new JSONObject(responseEntity.getBody()).getString("message");
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public String deleteAccount(String password) {
+        if (hash(password).equals(this.user.getPassword())) {
+            responseEntity = this.postRequest(this.baseUrl + Path.DELETE.toString(), user);
+            try {
+                return new JSONObject(responseEntity.getBody()).getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-        return "";
+        return "false";
     }
 
     /**
@@ -392,14 +401,16 @@ public class ClientController {
      *
      * @return String resposne msg ("true"/"false").
      */
-    public String reset() {
-        responseEntity = this.postRequest(this.baseUrl + Path.RESET, this.user);
-        try {
-            return new JSONObject(responseEntity.getBody()).getString("message");
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public String reset(String pass) {
+        if (hash(pass).equals(this.user.getPassword())) {
+            responseEntity = this.postRequest(this.baseUrl + Path.RESET, this.user);
+            try {
+                return new JSONObject(responseEntity.getBody()).getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-        return "";
+        return "false";
     }
 
     /**

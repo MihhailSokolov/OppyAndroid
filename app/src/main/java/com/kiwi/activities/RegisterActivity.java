@@ -81,6 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                 clientController = new ClientController(user, false);
                 String response = clientController.register();
                 if (response.equals("true")){
+                    Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_LONG).show();
                     loginPageIntent.putExtra("user", user);
                     startActivity(loginPageIntent);
                 } else {
