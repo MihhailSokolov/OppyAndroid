@@ -24,8 +24,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
         clientController.updateUser();
         user = clientController.getUser();
 
-        final TextView oldPassText = findViewById(R.id.oldPassText);
-        final TextView newPassText1 = findViewById(R.id.newPassText1);
+        final TextView oldPassText = findViewById(R.id.yourPassText);
+        final TextView newPassText1 = findViewById(R.id.newMailText);
         final TextView newPassText2 = findViewById(R.id.newPassText2);
         Button changePassButton = findViewById(R.id.changeButton);
 

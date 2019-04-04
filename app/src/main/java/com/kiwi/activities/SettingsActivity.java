@@ -35,7 +35,8 @@ public class SettingsActivity extends AppCompatActivity {
         clientController = new ClientController((User)getIntent().getSerializableExtra("user"), true);
         clientController.updateUser();
         user = clientController.getUser();
-
+        
+        Button changeEmailButton = findViewById(R.id.changeEmailButton);
         Button changePassButton = findViewById(R.id.changePassButton);
         Button logOutButton = findViewById(R.id.logOutButton);
         ImageView profilePic = findViewById(R.id.profilePic);
@@ -83,6 +84,14 @@ public class SettingsActivity extends AppCompatActivity {
                 Intent changePassIntent = new Intent(SettingsActivity.this, ChangePasswordActivity.class);
                 changePassIntent.putExtra("user", user);
                 startActivity(changePassIntent);
+            }
+        });
+
+        changeEmailButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent changeMailIntent = new Intent(SettingsActivity.this, ChangeMailActivity.class);
+                changeMailIntent.putExtra("user", user);
+                startActivity(changeMailIntent);
             }
         });
     }

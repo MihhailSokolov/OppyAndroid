@@ -22,6 +22,7 @@
         <activity android:name="com.kiwi.activities.RegisterActivity"></activity>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".ChangeMailActivity" />
     </application>
 
 </manifest>
