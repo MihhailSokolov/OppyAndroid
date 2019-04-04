@@ -9,13 +9,19 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.kiwi.activities.MainpageActivity"></activity>
-        <activity android:name="com.kiwi.activities.LoginActivity">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@menu/menu" />
+
+        <activity android:name=".FriendsActivity" />
+        <activity android:name=".MainpageActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,6 +29,7 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".ChangeMailActivity" />
+        <activity android:name=".RegisterActivity" />
     </application>
 
 </manifest>
