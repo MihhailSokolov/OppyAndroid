@@ -157,12 +157,16 @@ public class ClientController {
      * @param img the img file to be encoded and sent.
      * @return String response message ("true"/"false").
      */
-//    public String updateProfilePic(BufferedImage img) {
-//        String encodedStr = ImageHandler.getBase64Str(img);
-//        this.user.setProfilePicture(encodedStr);
-//        responseEntity = this.postRequest(this.baseUrl + Path.SETPROFILEPIC.toString(), user);
-//        return new JSONObject(responseEntity.getBody()).getString("message");
-//    }
+    public String updateProfilePic(String encodedStr) {
+        this.user.setProfilePicture(encodedStr);
+        responseEntity = this.postRequest(this.baseUrl + Path.SETPROFILEPIC.toString(), user);
+        try {
+            return new JSONObject(responseEntity.getBody()).getString("message");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return "false";
+        }
+    }
 
     /**
      * Deletes the given preset from the user's presetList on the server.

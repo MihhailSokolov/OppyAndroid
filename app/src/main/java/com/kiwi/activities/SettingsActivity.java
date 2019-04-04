@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -18,6 +19,9 @@ import android.widget.Toast;
 
 import com.kiwi.clientside.ClientController;
 import com.kiwi.model.User;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class SettingsActivity extends AppCompatActivity {
     private ClientController clientController;
@@ -46,8 +50,9 @@ public class SettingsActivity extends AppCompatActivity {
         anonSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 String response = clientController.updateAnonymous(isChecked);
+                String status = isChecked ? "anonymous" : "not anonymous";
                 if (response.equals("true"))
-                    Toast.makeText(getApplicationContext(), "Successfully changed your status", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Successfully changed your status to " + status, Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(getApplicationContext(), "Could not change your status", Toast.LENGTH_LONG).show();
             }
@@ -69,12 +74,29 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 42 && resultCode == Activity.RESULT_OK) {
-            String path = data.getDataString();
-            
-            System.out.println("PATH: "+path);
-            Bitmap newProfilePic = BitmapFactory.decodeFile(path);
-            ImageView profilePic = findViewById(R.id.profilePic);
-            profilePic.setImageBitmap(newProfilePic);
+            Uri imageUri = data.getData();
+            Bitmap newProfilePic;
+            try {
+                newProfilePic = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Could not get picture file", Toast.LENGTH_LONG).show();
+                return;
+            }
+            newProfilePic = Bitmap.createScaledBitmap(newProfilePic, 100, 100, true);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            newProfilePic.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            String encodedPic = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            clientController = new ClientController(user, true);
+            String response = clientController.updateProfilePic(encodedPic);
+            if (response.equals("true")) {
+                ImageView profilePic = findViewById(R.id.profilePic);
+                profilePic.setImageBitmap(newProfilePic);
+                Toast.makeText(getApplicationContext(), "Successfully changed profile picture", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Could not change profile picture", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
