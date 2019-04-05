@@ -30,6 +30,7 @@ public class ActionActivity extends AppCompatActivity {
     private ClientController clientController;
 
     private List<Action> actionList;
+    private List<Action> selectedActions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,8 @@ public class ActionActivity extends AppCompatActivity {
         expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
         expandableListAdapter = new ExpandableListAdapter(this, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
+
+        selectedActions = new ArrayList<>();
 //        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 //            @Override
 //            public void onGroupExpand(int groupPosition) {
@@ -64,14 +67,27 @@ public class ActionActivity extends AppCompatActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                Toast.makeText(
-                        getApplicationContext(),
-                        expandableListTitle.get(groupPosition)
-                                + " -> "
-                                + expandableListDetail.get(
-                                expandableListTitle.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT
-                ).show();
+                Action selectedAction = expandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition);
+                if(!selectedActions.contains(selectedAction)) {
+                    selectedActions.add(selectedAction);
+                    Toast.makeText(
+                            getApplicationContext(),
+                            selectedAction.getActionName()
+                                    + " added to list."
+                            , Toast.LENGTH_SHORT
+                    ).show();
+                }
+                else{
+                    selectedActions.remove(selectedAction);
+                    Toast.makeText(
+                            getApplicationContext(),
+                            selectedAction.getActionName()
+                                    + " removed from list."
+                            , Toast.LENGTH_SHORT
+                    ).show();
+                }
+
+
                 return false;
             }
         });

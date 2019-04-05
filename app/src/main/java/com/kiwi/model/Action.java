@@ -3,9 +3,10 @@ package com.kiwi.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Action {
+public class Action implements Serializable {
 
     private String id;
     private String actionName;
