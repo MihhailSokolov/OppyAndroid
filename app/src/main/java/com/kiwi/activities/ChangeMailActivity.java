@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,6 +22,8 @@ import java.util.regex.Pattern;
 public class ChangeMailActivity extends AppCompatActivity {
     private ClientController clientController;
     private User user;
+    private Intent friendsIntent;
+    private Intent settingsIntent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,6 +32,11 @@ public class ChangeMailActivity extends AppCompatActivity {
         clientController = new ClientController((User)getIntent().getSerializableExtra("user"), true);
         clientController.updateUser();
         user = clientController.getUser();
+
+        friendsIntent = new Intent(ChangeMailActivity.this, FriendsActivity.class);
+        settingsIntent = new Intent(ChangeMailActivity.this, SettingsActivity.class);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         final TextView passText = findViewById(R.id.yourPassText);
         final TextView newMailText = findViewById(R.id.newMailText);
@@ -58,5 +69,34 @@ public class ChangeMailActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                settingsIntent.putExtra("user", clientController.getUser());
+                startActivity(settingsIntent);
+                return true;
+
+            case R.id.action_friends:
+                friendsIntent.putExtra("user", clientController.getUser());
+                startActivity(friendsIntent);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="122dp"
-        android:contentDescription="Profile picture"
+        android:contentDescription="@string/profile_pic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="136dp"
-        android:text="username"
+        android:text="@string/username"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/profilePic"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
-        android:text="mail"
+        android:text="@string/mail"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/profilePic"
@@ -51,7 +51,7 @@
         android:layout_marginTop="52dp"
         android:showText="false"
         android:switchPadding="10dp"
-        android:text="Anonymous"
+        android:text="@string/anon"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:layout_marginTop="32dp"
-        android:text="Change email"
+        android:text="@string/change_mail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/anonSwitch" />
 
@@ -73,7 +73,7 @@
         android:layout_width="309dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Change password"
+        android:text="@string/change_pass"
         app:layout_constraintStart_toStartOf="@+id/changeEmailButton"
         app:layout_constraintTop_toBottomOf="@+id/changeEmailButton" />
 
@@ -82,7 +82,7 @@
         android:layout_width="309dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Log out"
+        android:text="@string/log_out"
         app:layout_constraintStart_toStartOf="@+id/changePassButton"
         app:layout_constraintTop_toBottomOf="@+id/changePassButton" />
 
@@ -91,7 +91,7 @@
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Delete account"
+        android:text="@string/delete_acc"
         app:layout_constraintStart_toStartOf="@+id/logOutButton"
         app:layout_constraintTop_toBottomOf="@+id/logOutButton" />
 
@@ -100,7 +100,20 @@
         android:layout_width="309dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Reset points"
+        android:text="@string/reset_points"
         app:layout_constraintStart_toStartOf="@+id/deleteAccButton"
         app:layout_constraintTop_toBottomOf="@+id/deleteAccButton" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="6dp"
+        app:title="@string/settings"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 </android.support.constraint.ConstraintLayout>

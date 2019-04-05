@@ -35,7 +35,8 @@ public class FriendsActivity extends AppCompatActivity {
     private List<User> friendList;
     private Intent mainPageIntent;
     private Toolbar toolbar;
-
+    private Intent settingsIntent;
+    private Intent leaderboardIntent;
 
     /*TODO
      * Prettify (add user profile pic? change text color etc)
@@ -45,7 +46,8 @@ public class FriendsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-
+        settingsIntent = new Intent(FriendsActivity.this, SettingsActivity.class);
+        leaderboardIntent = new Intent(FriendsActivity.this, LeaderboardActivity.class);
         clientController = new ClientController((User) getIntent().getSerializableExtra("user"),
                 true);
         clientController.updateUser();
@@ -127,15 +129,18 @@ public class FriendsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                //TODO
-                // User chose the "Settings" item, show the app settings UI...
+                settingsIntent.putExtra("user", clientController.getUser());
+                startActivity(settingsIntent);
                 return true;
 
             case R.id.action_mainpage:
                 mainPageIntent.putExtra("user", clientController.getUser());
                 startActivity(mainPageIntent);
                 return true;
-
+            case R.id.action_leaderboard:
+                leaderboardIntent.putExtra("user", clientController.getUser());
+                startActivity(leaderboardIntent);
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -162,13 +167,7 @@ public class FriendsActivity extends AppCompatActivity {
     private Comparator<User> userScoreComparator = new Comparator<User>() {
         @Override
         public int compare(User u1, User u2) {
-            if (u1.getScore() < u2.getScore()) {
-                return 1;
-            } else if (u1.getScore() > u2.getScore()) {
-                return -1;
-            } else {
-                return 0;
-            }
+            return Integer.compare(u2.getScore(), u1.getScore());
         }
     };
 
