@@ -16,7 +16,7 @@
         android:layout_marginTop="244dp"
         android:background="@android:color/background_light"
         android:ems="10"
-        android:hint="Your password"
+        android:hint="@string/your_pass"
         android:inputType="textPassword"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         android:layout_marginTop="52dp"
         android:background="@android:color/background_light"
         android:ems="10"
-        android:hint="New e-mail"
+        android:hint="@string/new_mail"
         android:inputType="text"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/yourPassText"
@@ -41,7 +41,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="60dp"
-        android:text="Change"
+        android:text="@string/change"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newMailText" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="6dp"
+        app:title="@string/change_mail"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 </android.support.constraint.ConstraintLayout>

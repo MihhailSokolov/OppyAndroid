@@ -11,8 +11,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Base64;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -31,6 +35,10 @@ import java.io.IOException;
 public class SettingsActivity extends AppCompatActivity {
     private ClientController clientController;
     private User user;
+    private Toolbar toolbar;
+    private Intent friendsIntent;
+    private Intent mainPageIntent;
+    private Intent leaderboardIntent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +47,10 @@ public class SettingsActivity extends AppCompatActivity {
         clientController = new ClientController((User)getIntent().getSerializableExtra("user"), true);
         clientController.updateUser();
         user = clientController.getUser();
+
+        friendsIntent = new Intent(SettingsActivity.this, FriendsActivity.class);
+        mainPageIntent = new Intent(SettingsActivity.this, MainpageActivity.class);
+        leaderboardIntent = new Intent(SettingsActivity.this, LeaderboardActivity.class);
 
         Button resetPointsButton = findViewById(R.id.resetPointsButton);
         Button deleteAccountButton = findViewById(R.id.deleteAccButton);
@@ -49,6 +61,10 @@ public class SettingsActivity extends AppCompatActivity {
         TextView usernameText = findViewById(R.id.textUsername);
         TextView mailText = findViewById(R.id.textEmail);
         Switch anonSwitch = findViewById(R.id.anonSwitch);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         if (user.getProfilePicture() == null || user.getProfilePicture().isEmpty())
             profilePic.setImageDrawable(getResources().getDrawable(R.drawable.oppy100x100));
         else
@@ -164,6 +180,37 @@ public class SettingsActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_mainpage:
+                mainPageIntent.putExtra("user", clientController.getUser());
+                startActivity(mainPageIntent);
+                return true;
+            case R.id.action_friends:
+                friendsIntent.putExtra("user", clientController.getUser());
+                startActivity(friendsIntent);
+                return true;
+            case R.id.action_leaderboard:
+                leaderboardIntent.putExtra("user", clientController.getUser());
+                startActivity(leaderboardIntent);
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

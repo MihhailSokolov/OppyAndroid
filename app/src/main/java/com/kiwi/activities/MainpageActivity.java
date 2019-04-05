@@ -21,6 +21,7 @@ public class MainpageActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Intent friendsIntent;
     private Intent settingsIntent;
+    private Intent leaderboardIntent;
 
 
     @Override
@@ -32,6 +33,7 @@ public class MainpageActivity extends AppCompatActivity {
 
         friendsIntent = new Intent(MainpageActivity.this, FriendsActivity.class);
         settingsIntent = new Intent(MainpageActivity.this, SettingsActivity.class);
+        leaderboardIntent = new Intent(MainpageActivity.this, LeaderboardActivity.class);
 
         pointstext = findViewById(R.id.pointstext);
         decaytext = findViewById(R.id.decaytext);
@@ -65,7 +67,10 @@ public class MainpageActivity extends AppCompatActivity {
                 friendsIntent.putExtra("user", clientController.getUser());
                 startActivity(friendsIntent);
                 return true;
-
+            case R.id.action_leaderboard:
+                leaderboardIntent.putExtra("user", clientController.getUser());
+                startActivity(leaderboardIntent);
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
