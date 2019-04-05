@@ -26,7 +26,7 @@ public class ActionActivity extends AppCompatActivity {
     private ExpandableListView expandableListView;
     private ExpandableListAdapter expandableListAdapter;
     private List<String> expandableListTitle;
-    private HashMap<String, List<String>> expandableListDetail;
+    private HashMap<String, List<Action>> expandableListDetail;
     private ClientController clientController;
 
     private List<Action> actionList;

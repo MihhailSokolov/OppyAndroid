@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ExpandableListData {
-       public static HashMap<String, List<String>> getData(List<Action> actionList) {
-        HashMap<String, List<String>> expandableListDetail = new HashMap<>();
+       public static HashMap<String, List<Action>> getData(List<Action> actionList) {
+        HashMap<String, List<Action>> expandableListDetail = new HashMap<>();
 
         List <String> categories = new ArrayList<>();
         categories.add("Recycling");
@@ -14,12 +14,12 @@ public class ExpandableListData {
         categories.add("misc");
         categories.add("transport");
         categories.add("food");
-        
-        List<String> recycling = getCategoryList("recycling", actionList);
-        List<String> energy = getCategoryList("energy", actionList);
-        List<String> food = getCategoryList("food", actionList);
-        List<String> transport = getCategoryList("transport", actionList);
-        List<String> misc = getCategoryList("misc", actionList);
+
+        List<Action> recycling = getCategoryList("recycling", actionList);
+        List<Action> energy = getCategoryList("energy", actionList);
+        List<Action> food = getCategoryList("food", actionList);
+        List<Action> transport = getCategoryList("transport", actionList);
+        List<Action> misc = getCategoryList("misc", actionList);
 
         expandableListDetail.put("Recylcing", recycling);
         expandableListDetail.put("Energy", energy);
@@ -30,12 +30,12 @@ public class ExpandableListData {
         return expandableListDetail;
     }
 
-    public static List<String> getCategoryList(String categoryName, List<Action> actionList){
-        List<String> categoryList = new ArrayList<>();
+    public static List<Action> getCategoryList(String categoryName, List<Action> actionList){
+        List<Action> categoryList = new ArrayList<>();
         if (actionList != null) {
             for (Action act : actionList) {
                 if (act.getCategory().toLowerCase().equals(categoryName.toLowerCase())) {
-                    categoryList.add(act.getActionName());
+                    categoryList.add(act);
                 }
             }
             return categoryList;
