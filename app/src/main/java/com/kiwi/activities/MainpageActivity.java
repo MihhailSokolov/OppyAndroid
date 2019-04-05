@@ -21,7 +21,6 @@ public class MainpageActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Intent friendsIntent;
     private Intent settingsIntent;
-    private Intent actionIntent;
 
 
     @Override
@@ -33,8 +32,6 @@ public class MainpageActivity extends AppCompatActivity {
 
         friendsIntent = new Intent(MainpageActivity.this, FriendsActivity.class);
         settingsIntent = new Intent(MainpageActivity.this, SettingsActivity.class);
-        actionIntent = new Intent(MainpageActivity.this, ActionActivity.class);
-
 
         pointstext = findViewById(R.id.pointstext);
         decaytext = findViewById(R.id.decaytext);
@@ -68,9 +65,6 @@ public class MainpageActivity extends AppCompatActivity {
                 friendsIntent.putExtra("user", clientController.getUser());
                 startActivity(friendsIntent);
                 return true;
-            case R.id.action_actionpage:
-                actionIntent.putExtra("user", clientController.getUser());
-                startActivity(actionIntent);
 
             default:
                 // If we got here, the user's action was not recognized.

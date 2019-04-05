@@ -500,7 +500,6 @@ public class ClientController {
         return null;
     }
 
-
     public User getUser() {
         return this.user;
     }
