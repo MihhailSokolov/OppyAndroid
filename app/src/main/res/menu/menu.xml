@@ -21,6 +21,10 @@
         android:title="Main page"
         app:showAsAction="ifRoom"
         />
+    <item android:id="@+id/action_actionpage"
+        android:title="Action page"
+        app:showAsAction="ifRoom"
+        />
 
 </menu>
 

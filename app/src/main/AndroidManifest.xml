@@ -12,6 +12,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ActionActivity"></activity>
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@menu/menu" />
@@ -25,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.kiwi.activities.RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".ChangeMailActivity" />
