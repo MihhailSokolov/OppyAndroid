@@ -167,13 +167,7 @@ public class FriendsActivity extends AppCompatActivity {
     private Comparator<User> userScoreComparator = new Comparator<User>() {
         @Override
         public int compare(User u1, User u2) {
-            if (u1.getScore() < u2.getScore()) {
-                return 1;
-            } else if (u1.getScore() > u2.getScore()) {
-                return -1;
-            } else {
-                return 0;
-            }
+            return Integer.compare(u2.getScore(), u1.getScore());
         }
     };
 

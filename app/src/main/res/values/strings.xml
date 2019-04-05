@@ -28,4 +28,9 @@
     <string name="pass_confirm">Confirm new password</string>
     <string name="new_pass">New password</string>
     <string name="current_pass">Current password</string>
+    <string name="top50">Top 50 players</string>
+    <string name="your_pos">Your position</string>
+    <string name="number1">№ 1</string>
+    <string name="points">Points</string>
+    <string name="rank">Rank</string>
 </resources>
