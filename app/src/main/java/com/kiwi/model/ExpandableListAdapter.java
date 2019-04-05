@@ -43,7 +43,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView expandedListTextView = convertView
                 .findViewById(R.id.child_text);
-        expandedListTextView.setText(expandedListAction.getActionName() + "\t\t\tPts: " +  expandedListAction.getPoints());
+        TextView expandedListTextView2 = convertView
+                .findViewById(R.id.child_pts_text);
+        expandedListTextView.setText(expandedListAction.getActionName());
+        expandedListTextView2.setText(expandedListAction.getPoints());
         return convertView;
     }
     @Override
