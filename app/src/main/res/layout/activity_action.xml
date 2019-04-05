@@ -51,6 +51,8 @@
         android:divider="#A4C739"
         android:dividerHeight="1.0dp"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/submitButton" />
+        app:layout_constraintTop_toBottomOf="@id/submitButton"
+        android:drawSelectorOnTop="true"
+        android:choiceMode="multipleChoice"/>
 
 </android.support.constraint.ConstraintLayout>

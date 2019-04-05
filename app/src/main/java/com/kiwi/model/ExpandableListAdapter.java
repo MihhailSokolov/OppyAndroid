@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kiwi.activities.R;
@@ -17,6 +18,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> expandableListTitle;
     private HashMap<String, List<Action>> expandableListDetail;
+
     public ExpandableListAdapter(Context context, List<String> expandableListTitle,
                                  HashMap<String, List<Action>> expandableListDetail) {
         this.context = context;
@@ -41,12 +43,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.action_child, null);
         }
+
         TextView expandedListTextView = convertView
                 .findViewById(R.id.child_text);
         TextView expandedListTextView2 = convertView
                 .findViewById(R.id.child_pts_text);
         expandedListTextView.setText(expandedListAction.getActionName());
-        expandedListTextView2.setText(expandedListAction.getPoints());
+        expandedListTextView2.setText(String.valueOf(expandedListAction.getPoints()));
         return convertView;
     }
     @Override

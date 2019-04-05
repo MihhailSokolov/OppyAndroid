@@ -1,5 +1,6 @@
 package com.kiwi.activities;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -76,6 +77,12 @@ public class ActionActivity extends AppCompatActivity {
                                     + " added to list."
                             , Toast.LENGTH_SHORT
                     ).show();
+//                    v.setSelected(true);
+                    int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition, childPosition));
+                    parent.setItemChecked(index, true);
+
+
+//                    v.setBackgroundResource(R.color.colorLogin);
                 }
                 else{
                     selectedActions.remove(selectedAction);
@@ -85,6 +92,11 @@ public class ActionActivity extends AppCompatActivity {
                                     + " removed from list."
                             , Toast.LENGTH_SHORT
                     ).show();
+//                    v.setBackgroundResource(R.color.colorAccent);
+                    int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition, childPosition));
+                    parent.setItemChecked(index, false);
+
+
                 }
 
 
