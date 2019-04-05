@@ -14,6 +14,7 @@ public class ExpandableListData {
         categories.add("misc");
         categories.add("transport");
         categories.add("food");
+        int i =0;
 
         List<String> recycling = getCategoryList("recycling", actionList);
         List<String> energy = getCategoryList("energy", actionList);
