@@ -24,7 +24,7 @@
     <item
         android:id="@+id/action_actionpage"
         android:icon="@drawable/oppyicon"
-        android:title="Main page"
+        android:title="Action page"
         app:showAsAction="ifRoom"/>
 
 </menu>

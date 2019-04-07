@@ -16,6 +16,7 @@
             android:name="com.google.android.actions"
             android:resource="@menu/menu" />
 
+        <activity android:name=".ActionActivity"/>
         <activity android:name=".FriendsActivity" />
         <activity android:name=".MainpageActivity" />
         <activity android:name=".LoginActivity">
@@ -29,7 +30,6 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".ChangeMailActivity" />
-        <activity android:name=".RegisterActivity" />
         <activity android:name=".LeaderboardActivity" />
     </application>
 

@@ -46,6 +46,7 @@ public class ActionActivity extends AppCompatActivity {
     private Intent friendsIntent;
     private Intent settingsIntent;
     private Intent mainPageIntent;
+    private Intent leaderboardIntent;
 
 
     @Override
@@ -74,6 +75,7 @@ public class ActionActivity extends AppCompatActivity {
         friendsIntent = new Intent(ActionActivity.this, FriendsActivity.class);
         settingsIntent = new Intent(ActionActivity.this, SettingsActivity.class);
         mainPageIntent = new Intent(ActionActivity.this, MainpageActivity.class);
+        leaderboardIntent = new Intent(ActionActivity.this, MainpageActivity.class);
 
         setSupportActionBar(toolbar);
         setListChildListener();
@@ -200,6 +202,12 @@ public class ActionActivity extends AppCompatActivity {
             case R.id.action_mainpage:
                 mainPageIntent.putExtra("user", clientController.getUser());
                 startActivity(mainPageIntent);
+                return true;
+
+            case R.id.action_leaderboard:
+                mainPageIntent.putExtra("user", clientController.getUser());
+                startActivity(leaderboardIntent);
+                return true;
 
             default:
                 // If we got here, the user's action was not recognized.

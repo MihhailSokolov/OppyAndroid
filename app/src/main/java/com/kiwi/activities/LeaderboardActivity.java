@@ -24,6 +24,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     private Intent friendsIntent;
     private Intent settingsIntent;
     private Intent mainPageIntent;
+    private Intent actionIntent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         friendsIntent = new Intent(LeaderboardActivity.this, FriendsActivity.class);
         settingsIntent = new Intent(LeaderboardActivity.this, SettingsActivity.class);
         mainPageIntent = new Intent(LeaderboardActivity.this, MainpageActivity.class);
+        actionIntent = new Intent(LeaderboardActivity.this, ActionActivity.class);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -101,6 +103,10 @@ public class LeaderboardActivity extends AppCompatActivity {
             case R.id.action_mainpage:
                 mainPageIntent.putExtra("user", clientController.getUser());
                 startActivity(mainPageIntent);
+                return true;
+            case R.id.action_actionpage:
+                actionIntent.putExtra("user", clientController.getUser());
+                startActivity(actionIntent);
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
