@@ -206,7 +206,7 @@ public class ActionActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_leaderboard:
-                mainPageIntent.putExtra("user", clientController.getUser());
+                leaderboardIntent.putExtra("user", clientController.getUser());
                 startActivity(leaderboardIntent);
                 return true;
 
