@@ -75,7 +75,7 @@ public class ActionActivity extends AppCompatActivity {
         friendsIntent = new Intent(ActionActivity.this, FriendsActivity.class);
         settingsIntent = new Intent(ActionActivity.this, SettingsActivity.class);
         mainPageIntent = new Intent(ActionActivity.this, MainpageActivity.class);
-        leaderboardIntent = new Intent(ActionActivity.this, MainpageActivity.class);
+        leaderboardIntent = new Intent(ActionActivity.this, LeaderboardActivity.class);
 
         setSupportActionBar(toolbar);
         setListChildListener();
