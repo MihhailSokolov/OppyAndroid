@@ -142,6 +142,16 @@ public class ClientController {
 
     }
 
+    public String takeActions(List<Action> listOfActions) {
+        responseEntity = this.postRequest(this.baseUrl + String.format(Path.TAKEACTIONS.toString(), user.getUsername()), actionList);
+        try {
+            return objectMapper.readValue(responseEntity.getBody(), Response.class).getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "false";
+    }
+
     /**
      * Fetches the profile picture base 64 string from the server.
      * @param username who the profile picture belongs to.

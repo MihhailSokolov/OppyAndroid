@@ -48,6 +48,14 @@ public class MainpageActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        clientController.updateUser();
+        pointstext.setText(String.valueOf(clientController.getUser().getScore()));
+        setOppyImage();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
