@@ -34,8 +34,9 @@ public class FriendsActivity extends AppCompatActivity {
     private TextView searchTextView;
     private List<User> friendList;
     private Intent mainPageIntent;
-    private Toolbar toolbar;
     private Intent settingsIntent;
+    private Intent actionIntent;
+    private Toolbar toolbar;
     private Intent leaderboardIntent;
 
     /*TODO
@@ -59,6 +60,9 @@ public class FriendsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mainPageIntent = new Intent(FriendsActivity.this, MainpageActivity.class);
+        settingsIntent = new Intent(FriendsActivity.this, SettingsActivity.class);
+        actionIntent = new Intent(FriendsActivity.this, ActionActivity.class);
+
 
         mAdapter = new UserAdapter(friendList, getApplication());
         recyclerView = findViewById(R.id.recyclerview);
@@ -141,6 +145,12 @@ public class FriendsActivity extends AppCompatActivity {
                 leaderboardIntent.putExtra("user", clientController.getUser());
                 startActivity(leaderboardIntent);
                 return true;
+
+                case R.id.action_actionpage:
+                actionIntent.putExtra("user", clientController.getUser());
+                startActivity(actionIntent);
+                return true;
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.

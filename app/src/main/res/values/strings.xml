@@ -33,4 +33,10 @@
     <string name="number1">№ 1</string>
     <string name="points">Points</string>
     <string name="rank">Rank</string>
+    <string name="action_page">Action Page</string>
+    <string name="delete_preset">Delete preset</string>
+    <string name="submit">Submit</string>
+    <string name="del_preset">Del preset</string>
+    <string name="time_until_point_loss">Time until point loss:</string>
+>>>>>>> action-page-2
 </resources>
