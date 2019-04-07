@@ -15,4 +15,8 @@
     <string name="leaderboard">Leaderboard</string>
     <string name="main_page">Main page</string>
     <string name="action_page">Action Page</string>
+    <string name="delete_preset">Delete preset</string>
+    <string name="submit">Submit</string>
+    <string name="del_preset">Del preset</string>
+    <string name="time_until_point_loss">Time until point loss:</string>
 </resources>

@@ -34,6 +34,8 @@ public class FriendsActivity extends AppCompatActivity {
     private TextView searchTextView;
     private List<User> friendList;
     private Intent mainPageIntent;
+    private Intent settingsIntent;
+    private Intent actionIntent;
     private Toolbar toolbar;
 
 
@@ -57,6 +59,9 @@ public class FriendsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mainPageIntent = new Intent(FriendsActivity.this, MainpageActivity.class);
+        settingsIntent = new Intent(FriendsActivity.this, SettingsActivity.class);
+        actionIntent = new Intent(FriendsActivity.this, ActionActivity.class);
+
 
         mAdapter = new UserAdapter(friendList, getApplication());
         recyclerView = findViewById(R.id.recyclerview);
@@ -127,13 +132,17 @@ public class FriendsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                //TODO
-                // User chose the "Settings" item, show the app settings UI...
+                actionIntent.putExtra("user", clientController.getUser());
+                startActivity(actionIntent);
                 return true;
 
             case R.id.action_mainpage:
                 mainPageIntent.putExtra("user", clientController.getUser());
                 startActivity(mainPageIntent);
+                return true;
+            case R.id.action_actionpage:
+                actionIntent.putExtra("user", clientController.getUser());
+                startActivity(actionIntent);
                 return true;
 
             default:
