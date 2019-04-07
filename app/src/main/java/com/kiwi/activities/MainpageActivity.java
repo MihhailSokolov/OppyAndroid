@@ -184,6 +184,7 @@ public class MainpageActivity extends AppCompatActivity implements AdapterView.O
             case R.id.action_leaderboard:
                 leaderboardIntent.putExtra("user", clientController.getUser());
                 startActivity(leaderboardIntent);
+                return true;
             case R.id.action_actionpage:
                 actionIntent.putExtra("user", clientController.getUser());
                 startActivity(actionIntent);

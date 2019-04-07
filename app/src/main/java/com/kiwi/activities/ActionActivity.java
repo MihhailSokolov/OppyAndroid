@@ -87,16 +87,19 @@ public class ActionActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                for(Action sa : selectedActions)
+                    System.out.println(sa.getActionName());
                 String responseMsg = "";
                 if (selectedActions.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "You haven't selected any actions!", Toast.LENGTH_LONG).show();
                 } else {
                     responseMsg = clientController.takeActions(selectedActions);
-                }
-                if(responseMsg.equals("true")){
-                    Toast.makeText(getApplicationContext(), "Well done! You made Oppy a little bit happier!", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_LONG).show();
+
+                    if (responseMsg.equals("true")) {
+                        Toast.makeText(getApplicationContext(), "Well done! You made Oppy a little bit happier!", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
