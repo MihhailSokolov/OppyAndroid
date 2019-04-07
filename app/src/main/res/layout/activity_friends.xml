@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kiwi.activities.FriendsActivity">
+    tools:context="com.kiwi.activities.FriendsActivity"
+    >
 
     <EditText
         android:id="@+id/searchtext"
@@ -23,7 +24,7 @@
         android:layout_width="35dp"
         android:layout_height="25dp"
         android:background="@color/colorLogin"
-        android:text="Add"
+        android:text="+"
         tools:layout_editor_absoluteX="268dp"
         tools:layout_editor_absoluteY="12dp"
         android:layout_marginTop="88dp"
@@ -36,8 +37,8 @@
         android:id="@+id/deletebutton"
         android:layout_width="35dp"
         android:layout_height="25dp"
-        android:background="@color/red"
-        android:text="Del"
+        android:background="@android:color/holo_red_dark"
+        android:text="-"
         tools:layout_editor_absoluteX="319dp"
         tools:layout_editor_absoluteY="12dp"
         android:layout_marginTop="88dp"

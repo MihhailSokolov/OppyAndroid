@@ -39,6 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Intent friendsIntent;
     private Intent mainPageIntent;
     private Intent leaderboardIntent;
+    private Intent actionIntent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
         friendsIntent = new Intent(SettingsActivity.this, FriendsActivity.class);
         mainPageIntent = new Intent(SettingsActivity.this, MainpageActivity.class);
         leaderboardIntent = new Intent(SettingsActivity.this, LeaderboardActivity.class);
+        actionIntent = new Intent(SettingsActivity.this, ActionActivity.class);
 
         Button resetPointsButton = findViewById(R.id.resetPointsButton);
         Button deleteAccountButton = findViewById(R.id.deleteAccButton);
@@ -205,6 +207,10 @@ public class SettingsActivity extends AppCompatActivity {
             case R.id.action_leaderboard:
                 leaderboardIntent.putExtra("user", clientController.getUser());
                 startActivity(leaderboardIntent);
+                return true;
+            case R.id.action_actionpage:
+                actionIntent.putExtra("user", clientController.getUser());
+                startActivity(actionIntent);
                 return true;
             default:
                 // If we got here, the user's action was not recognized.

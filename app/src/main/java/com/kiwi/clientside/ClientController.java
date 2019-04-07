@@ -138,8 +138,33 @@ public class ClientController {
             public String toString() {
                 return "position?username=%s";
             }
+        }, EXECUTEPRESET {
+            public String toString() {
+                return "executepreset?username=%s";
+            }
         }
 
+    }
+
+    public String executePreset(String presetName) {
+        Preset preset = new Preset(presetName, null);
+        responseEntity = this.postRequest(this.baseUrl + String.format(Path.EXECUTEPRESET.toString(), user.getUsername()), preset);
+        try {
+            return objectMapper.readValue(responseEntity.getBody(), Response.class).getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "false";
+    }
+
+    public String takeActions(List<Action> listOfActions) {
+        responseEntity = this.postRequest(this.baseUrl + String.format(Path.TAKEACTIONS.toString(), user.getUsername()), actionList);
+        try {
+            return objectMapper.readValue(responseEntity.getBody(), Response.class).getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "false";
     }
 
     /**
@@ -177,7 +202,6 @@ public class ClientController {
     public String deletePreset(Preset preset) {
         responseEntity = this.postRequest(this.baseUrl
                 + String.format(Path.DELETEPRESET.toString(), this.user.getUsername()), preset);
-
         try {
             return new JSONObject(responseEntity.getBody()).getString("message");
         } catch (JSONException e) {
