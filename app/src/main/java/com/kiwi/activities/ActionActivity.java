@@ -87,8 +87,6 @@ public class ActionActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for(Action sa : selectedActions)
-                    System.out.println(sa.getActionName());
                 String responseMsg = "";
                 if (selectedActions.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "You haven't selected any actions!", Toast.LENGTH_LONG).show();
