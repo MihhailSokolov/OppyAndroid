@@ -5,7 +5,6 @@ import com.google.common.base.Objects;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,9 +22,10 @@ public class User implements Serializable {
     private String profilePicture;
     private List<Preset> presets;
     private List<User> friends;
+    private boolean hasSolarPanels;
 
     /**
-     * Constructor for com.kiwi.oppy.User object.
+     * Constructor for User object.
      *
      * @param username username of user
      * @param password pass of the user
@@ -45,6 +45,7 @@ public class User implements Serializable {
         this.profilePicture = "";
         this.presets = new ArrayList<>();
         this.friends = new ArrayList<>();
+        this.hasSolarPanels = false;
     }
 
     public Date getRegisterDate() {
@@ -119,6 +120,14 @@ public class User implements Serializable {
         this.friends = friends;
     }
 
+    public boolean hasSolarPanels() {
+        return hasSolarPanels;
+    }
+
+    public void setHasSolarPanels(boolean hasSolarPanels) {
+        this.hasSolarPanels = hasSolarPanels;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == null || getClass() != other.getClass()) {
@@ -127,6 +136,7 @@ public class User implements Serializable {
         User user = (User) other;
         return score == user.score
                 && anonymous == user.anonymous
+                && hasSolarPanels == user.hasSolarPanels
                 && Objects.equal(username, user.username)
                 && Objects.equal(password, user.password)
                 && Objects.equal(email, user.email)
