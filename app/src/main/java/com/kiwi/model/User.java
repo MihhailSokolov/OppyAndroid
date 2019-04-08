@@ -120,7 +120,7 @@ public class User implements Serializable {
         this.friends = friends;
     }
 
-    public boolean hasSolarPanels() {
+    public boolean isHasSolarPanels() {
         return hasSolarPanels;
     }
 
