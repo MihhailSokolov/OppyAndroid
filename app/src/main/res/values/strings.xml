@@ -38,5 +38,6 @@
     <string name="submit">Submit</string>
     <string name="del_preset">Del preset</string>
     <string name="time_until_point_loss">Time until point loss:</string>
->>>>>>> action-page-2
+    <string name="action_name">Action name</string>
+    >>>>>>> action-page-2
 </resources>

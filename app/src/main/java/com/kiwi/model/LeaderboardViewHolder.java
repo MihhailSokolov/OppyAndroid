@@ -1,8 +1,10 @@
-package com.kiwi.activities;
+package com.kiwi.model;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import com.kiwi.activities.R;
 
 public class LeaderboardViewHolder extends RecyclerView.ViewHolder {
     TextView positionTextView;

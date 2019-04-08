@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kiwi.activities.ActionActivity"
-    android:background="@drawable/nightsky">
+    android:background="@drawable/nightsky"
+    tools:context="com.kiwi.activities.ActionActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -38,17 +38,16 @@
         android:layout_marginTop="75dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/round_green_corner_button"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
         android:text="Save as preset"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scrollbarAlwaysDrawVerticalTrack="true"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ExpandableListView
         android:id="@+id/elv"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="300dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
         android:background="@color/bgLv"
         android:choiceMode="multipleChoice"
         android:divider="#A4C739"
@@ -56,5 +55,26 @@
         android:drawSelectorOnTop="true"
         android:textColor="@android:color/holo_green_dark"
         app:layout_constraintTop_toBottomOf="@id/submitButton" />
+
+    <TextView
+        android:id="@+id/selected_items_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Selected actions:"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/elv" />
+
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/bgLv"
+        app:layout_constraintTop_toBottomOf="@id/selected_items_caption" />
+
 
 </android.support.constraint.ConstraintLayout>
