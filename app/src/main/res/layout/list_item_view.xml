@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/text_list_points"
-        android:layout_width="114dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="@string/points" />
