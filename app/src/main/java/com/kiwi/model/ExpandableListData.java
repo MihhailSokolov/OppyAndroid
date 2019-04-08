@@ -21,7 +21,7 @@ public class ExpandableListData {
         List<Action> transport = getCategoryList("transport", actionList);
         List<Action> misc = getCategoryList("misc", actionList);
 
-        expandableListDetail.put("Recylcing", recycling);
+        expandableListDetail.put("Recycling", recycling);
         expandableListDetail.put("Energy", energy);
         expandableListDetail.put("Food", food);
         expandableListDetail.put("Transport", transport);
