@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 
 import com.kiwi.clientside.ClientController;
@@ -19,9 +20,11 @@ import com.kiwi.model.ExpandableListAdapter;
 
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.kiwi.model.ExpandableListData;
+import com.kiwi.model.ListViewAdapter;
 import com.kiwi.model.Preset;
 import com.kiwi.model.User;
 
@@ -36,6 +39,8 @@ public class ActionActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ExpandableListView expandableListView;
     private ExpandableListAdapter expandableListAdapter;
+    private ListView listView;
+    private ListViewAdapter listViewAdapter;
     private List<String> expandableListTitle;
     private HashMap<String, List<Action>> expandableListDetail;
     private ClientController clientController;
@@ -64,6 +69,7 @@ public class ActionActivity extends AppCompatActivity {
         savebutton = findViewById(R.id.saveButton);
         submitButton = findViewById(R.id.submitButton);
         expandableListView = findViewById(R.id.elv);
+        listView = findViewById(R.id.lv);
 
         expandableListDetail = ExpandableListData.getData(actionList);
         expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
@@ -71,6 +77,9 @@ public class ActionActivity extends AppCompatActivity {
         expandableListView.setAdapter(expandableListAdapter);
 
         selectedActions = new ArrayList<>();
+        listViewAdapter = new ListViewAdapter(this, selectedActions);
+        listView.setAdapter(listViewAdapter);
+
 
         friendsIntent = new Intent(ActionActivity.this, FriendsActivity.class);
         settingsIntent = new Intent(ActionActivity.this, SettingsActivity.class);
@@ -82,6 +91,7 @@ public class ActionActivity extends AppCompatActivity {
         setListChildListener();
         setSubmitButtonListener();
         setSaveButtonListener();
+        setListViewListener();
     }
 
     private void setSubmitButtonListener(){
@@ -95,6 +105,8 @@ public class ActionActivity extends AppCompatActivity {
                     responseMsg = clientController.takeActions(selectedActions);
 
                     if (responseMsg.equals("true")) {
+                        selectedActions.clear();
+                        listViewAdapter.notifyDataSetChanged();
                         Toast.makeText(getApplicationContext(), "Well done! You made Oppy a little bit happier!", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_LONG).show();
@@ -171,21 +183,21 @@ public class ActionActivity extends AppCompatActivity {
                 Action selectedAction = expandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition);
                 if(!selectedActions.contains(selectedAction)) {
                     selectedActions.add(selectedAction);
+                    listViewAdapter.notifyDataSetChanged();
                     Toast.makeText(
                             getApplicationContext(),
-                            selectedAction.getActionName()
-                                    + " added to list."
+                            "Added to list"
                             , Toast.LENGTH_SHORT
                     ).show();
-                    parent.setItemChecked(index, true);
+//                    parent.setItemChecked(index, true);
                 }
                 else{
-                    parent.setItemChecked(index, false);
+//                    parent.setItemChecked(index, false);
                     selectedActions.remove(selectedAction);
+                    listViewAdapter.notifyDataSetChanged();
                     Toast.makeText(
                             getApplicationContext(),
-                            selectedAction.getActionName()
-                                    + " removed from list."
+                                    "Removed from list."
                             , Toast.LENGTH_SHORT
                     ).show();
                 }
@@ -229,5 +241,22 @@ public class ActionActivity extends AppCompatActivity {
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void setListViewListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                if(selectedActions.contains(listView.getItemAtPosition(position))){
+                    selectedActions.remove(listView.getItemAtPosition(position));
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Removed from list."
+                            , Toast.LENGTH_SHORT
+                    ).show();
+                    listViewAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 }

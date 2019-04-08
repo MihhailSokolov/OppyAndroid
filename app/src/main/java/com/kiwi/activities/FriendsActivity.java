@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 import com.kiwi.clientside.ClientController;
 import com.kiwi.model.User;
+import com.kiwi.model.UserAdapter;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;

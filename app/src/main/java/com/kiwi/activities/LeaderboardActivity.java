@@ -12,11 +12,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.kiwi.clientside.ClientController;
+import com.kiwi.model.LeaderboardAdapter;
 import com.kiwi.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListResourceBundle;
 
 public class LeaderboardActivity extends AppCompatActivity {
     ClientController clientController;
