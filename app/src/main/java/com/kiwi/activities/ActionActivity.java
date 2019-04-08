@@ -78,6 +78,7 @@ public class ActionActivity extends AppCompatActivity {
         leaderboardIntent = new Intent(ActionActivity.this, LeaderboardActivity.class);
 
         setSupportActionBar(toolbar);
+        setListGroupListener();
         setListChildListener();
         setSubmitButtonListener();
         setSaveButtonListener();
@@ -144,6 +145,19 @@ public class ActionActivity extends AppCompatActivity {
                     });
                     builder.show();
                 }
+            }
+        });
+    }
+
+
+    private void setListGroupListener(){
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousGroup = -1;
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if(groupPosition != previousGroup)
+                    expandableListView.collapseGroup(previousGroup);
+                previousGroup = groupPosition;
             }
         });
     }
