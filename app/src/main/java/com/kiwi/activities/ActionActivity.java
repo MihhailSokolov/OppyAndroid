@@ -105,6 +105,8 @@ public class ActionActivity extends AppCompatActivity {
                     responseMsg = clientController.takeActions(selectedActions);
 
                     if (responseMsg.equals("true")) {
+                        selectedActions.clear();
+                        listViewAdapter.notifyDataSetChanged();
                         Toast.makeText(getApplicationContext(), "Well done! You made Oppy a little bit happier!", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_LONG).show();
