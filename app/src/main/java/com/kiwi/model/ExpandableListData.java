@@ -17,6 +17,12 @@ public class ExpandableListData {
 
         List<Action> recycling = getCategoryList("recycling", actionList);
         List<Action> energy = getCategoryList("energy", actionList);
+        for(int i=0; i < energy.size(); i++){
+            if(energy.get(i).getActionName().toLowerCase().equals("installing solar panels")){
+                energy.remove(energy.get(i));
+            }
+        }
+
         List<Action> food = getCategoryList("food", actionList);
         List<Action> transport = getCategoryList("transport", actionList);
         List<Action> misc = getCategoryList("misc", actionList);

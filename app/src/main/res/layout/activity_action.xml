@@ -47,14 +47,14 @@
         android:id="@+id/elv"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@color/bgLv"
         android:choiceMode="multipleChoice"
         android:divider="#A4C739"
         android:dividerHeight="1.0dp"
         android:drawSelectorOnTop="true"
         android:textColor="@android:color/holo_green_dark"
-        app:layout_constraintTop_toBottomOf="@id/submitButton" />
+        app:layout_constraintTop_toBottomOf="@id/solarPanelSwitch" />
 
     <TextView
         android:id="@+id/selected_items_caption"
@@ -75,6 +75,21 @@
         android:layout_marginTop="8dp"
         android:background="@color/bgLv"
         app:layout_constraintTop_toBottomOf="@id/selected_items_caption" />
+
+    <Switch
+        android:id="@+id/solarPanelSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round_dark_green_corner_button"
+        android:gravity="center_horizontal"
+        android:text=" Solar panels installed  "
+        android:textColor="@android:color/white"
+
+        app:layout_constraintBottom_toTopOf="@id/elv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/submitButton" />
 
 
 </android.support.constraint.ConstraintLayout>
