@@ -142,6 +142,10 @@ public class ClientController {
             public String toString() {
                 return "executepreset?username=%s";
             }
+        }, CHANGESOLAR {
+            public String toString() {
+                return "changeSolarPanels?isHasSolarPanels=%s";
+            }
         }
 
     }
@@ -607,5 +611,16 @@ public class ClientController {
         return "";
     }
 
-
+    public String updateSolarPanel(boolean trueOrFalse) {
+        responseEntity = this.postRequest(this.baseUrl
+                + String.format(Path.CHANGESOLAR.toString(), trueOrFalse), user);
+        String responseMsg = null;
+        try {
+            responseMsg = new JSONObject(responseEntity.getBody()).getString("message");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        this.user.setHasSolarPanels(trueOrFalse);
+        return responseMsg;
+    }
 }

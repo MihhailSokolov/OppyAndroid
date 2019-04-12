@@ -21,6 +21,7 @@ import com.kiwi.model.ExpandableListAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.kiwi.model.ExpandableListData;
@@ -36,6 +37,7 @@ public class ActionActivity extends AppCompatActivity {
 
     private Button savebutton;
     private Button submitButton;
+    private Switch solarPanelSwitch;
     private Toolbar toolbar;
     private ExpandableListView expandableListView;
     private ExpandableListAdapter expandableListAdapter;
@@ -68,6 +70,8 @@ public class ActionActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         savebutton = findViewById(R.id.saveButton);
         submitButton = findViewById(R.id.submitButton);
+        solarPanelSwitch = findViewById(R.id.solarPanelSwitch);
+
         expandableListView = findViewById(R.id.elv);
         listView = findViewById(R.id.lv);
 
@@ -87,6 +91,7 @@ public class ActionActivity extends AppCompatActivity {
         leaderboardIntent = new Intent(ActionActivity.this, LeaderboardActivity.class);
 
         setSupportActionBar(toolbar);
+        setSwitch();
         setListGroupListener();
         setListChildListener();
         setSubmitButtonListener();
@@ -94,16 +99,47 @@ public class ActionActivity extends AppCompatActivity {
         setListViewListener();
     }
 
+    private void setSwitch() {
+        solarPanelSwitch.setChecked(clientController.getUser().getHasSolarPanels());
+
+        solarPanelSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final boolean hasSolarPanels = clientController.getUser().getHasSolarPanels();
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
+                builder.setTitle("Toggle solar panels?");
+                if(!hasSolarPanels){
+                    builder.setMessage(getString(R.string.pos_switch_text) +
+                            "\n\nAre you sure you want to continue?");
+                } else {
+                    builder.setMessage(getString(R.string.neg_switch_text) +
+                            "\n\nAre you sure you want to continue?");
+                }
+                builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        clientController.updateSolarPanel(!hasSolarPanels);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        solarPanelSwitch.setChecked(clientController.getUser().getHasSolarPanels());
+                    }
+                });
+                builder.show();
+            }
+        });
+
+    }
+
     private void setSubmitButtonListener(){
         submitButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String responseMsg = "";
+                String responseMsg;
                 if (selectedActions.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "You haven't selected any actions!", Toast.LENGTH_LONG).show();
                 } else {
                     responseMsg = clientController.takeActions(selectedActions);
-
                     if (responseMsg.equals("true")) {
                         selectedActions.clear();
                         listViewAdapter.notifyDataSetChanged();
