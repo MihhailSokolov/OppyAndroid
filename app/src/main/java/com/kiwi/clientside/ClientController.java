@@ -22,7 +22,7 @@ import com.kiwi.model.User;
 
 public class ClientController {
     private User user;
-    private String baseUrl = "https://oppy-project.herokuapp.com/";
+    private String baseUrl = "http://localhost:8080/";
     private RestTemplate restTemplate = new RestTemplate();
     private List<Action> actionList = null;
     private ResponseEntity<String> responseEntity = null;
